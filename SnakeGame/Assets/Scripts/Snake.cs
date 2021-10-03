@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(TailGeneration))]
+[RequireComponent(typeof(SnakeInput))]
 
 public class Snake : MonoBehaviour
 {
@@ -12,16 +13,20 @@ public class Snake : MonoBehaviour
     [SerializeField] private SnakeHead _head;
     [SerializeField] private float _speed;
     [SerializeField] private float _tailSpeed;
+    private SnakeInput _input;
 
     private void Awake()
     {
         _tailGeneration = GetComponent <TailGeneration>();
+        _input = GetComponent<SnakeInput>();
         _tail = _tailGeneration.Generate();
     }
 
     private void FixedUpdate()
     {
         Move(_head.transform.position + _head.transform.up * _speed * Time.deltaTime);
+
+        _head.transform.up = _input.GetDistanceToClick(_head.transform.position);
     }
 
     private void Move(Vector3 nextPosition)
