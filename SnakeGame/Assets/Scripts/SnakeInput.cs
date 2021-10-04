@@ -5,11 +5,12 @@ using UnityEngine;
 public class SnakeInput : MonoBehaviour
 {
     private Camera _camera;
-
+    
     private void Start()
     {
         _camera = Camera.main;
     }
+    
     public Vector2 GetDistanceToClick(Vector2 headPosition)
     {
         Vector3 mousePosition = Input.mousePosition;

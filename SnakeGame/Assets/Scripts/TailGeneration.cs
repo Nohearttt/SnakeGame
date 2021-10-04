@@ -6,6 +6,7 @@ public class TailGeneration : MonoBehaviour
 {
     [SerializeField] private int _tailSize;
     [SerializeField] private Segment _segmentTemplate;
+
     public List<Segment> Generate()
     {
         List<Segment> tail = new List<Segment>();
@@ -17,4 +18,5 @@ public class TailGeneration : MonoBehaviour
 
         return tail;
     }
+    
 }
