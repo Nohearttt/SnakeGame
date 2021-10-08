@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Block : MonoBehaviour
 {
@@ -8,15 +9,20 @@ public class Block : MonoBehaviour
 
     private int _destroyPrice;
     private int _filling;
+    public event UnityAction<int> FillingUpdate;
+    public int LeftToFill => _destroyPrice - _filling;
 
     private void Start()
     {
         _destroyPrice = Random.Range(_destroyPriceRange.x, _destroyPriceRange.y);
+        FillingUpdate?.Invoke(LeftToFill);
     }
     
     public void Fill()
     {
         _filling++;
+
+        FillingUpdate.Invoke(LeftToFill);
         if (_filling == _destroyPrice)
         {
             Destroy(gameObject);
